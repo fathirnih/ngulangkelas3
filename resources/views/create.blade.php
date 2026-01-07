@@ -1,25 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Siswa</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h2>Tambah Siswa</h2>
+@section('title', 'Tambah Siswa')
 
-<form action="/store" method="POST">
-    @csrf
-    <input type="text" name="nama" placeholder="Nama" required>
-    <input type="text" name="kelas" placeholder="Kelas" required>
-    <br><br>
-    <button type="submit">Simpan</button>
-</form>
+@section('content')
+<div class="card">
+    <div class="card-header bg-gradient-success text-white">
+        <h6 class="mb-0">Tambah Siswa</h6>
+    </div>
 
-<br>
+    <div class="card-body">
+        <form action="/store" method="POST">
+            @csrf
 
-<a href="/">
-    <button>Kembali</button>
-</a>
+            <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control" required>
+            </div>
 
-</body>
-</html>
+            <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Kelas</label>
+                <input type="text" name="kelas" class="form-control" required>
+            </div>
+
+            <button class="btn btn-success">Simpan</button>
+            <a href="/" class="btn btn-secondary">Kembali</a>
+        </form>
+    </div>
+</div>
+@endsection
