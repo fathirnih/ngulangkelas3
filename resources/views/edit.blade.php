@@ -1,31 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Siswa</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h2>Edit Siswa</h2>
+@section('title', 'Edit Siswa')
 
-<form action="/update/{{ $siswa->id }}" method="POST">
-    @csrf
+@section('content')
+<div class="card">
+    <div class="card-header bg-gradient-success text-white">
+        <h6 class="mb-0">Edit Siswa</h6>
+    </div>
 
-    <label>Nama</label><br>
-    <input type="text" name="nama" value="{{ $siswa->nama }}" required>
-    <br><br>
+    <div class="card-body">
+        <form action="/update/{{ $siswa->id }}" method="POST">
+            @csrf
 
-    <label>Kelas</label><br>
-    <input type="text" name="kelas" value="{{ $siswa->kelas }}" required>
-    <br><br>
+            <div class="input-group input-group-outline is-filled mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control"
+                       value="{{ $siswa->nama }}" required>
+            </div>
 
-    <button type="submit">Update</button>
-</form>
+            <div class="input-group input-group-outline is-filled mb-3">
+                <label class="form-label">Kelas</label>
+                <input type="text" name="kelas" class="form-control"
+                       value="{{ $siswa->kelas }}" required>
+            </div>
 
-<br>
-
-<a href="/">
-    <button>Kembali</button>
-</a>
-
-</body>
-</html>
+            <button class="btn btn-success">Update</button>
+            <a href="/" class="btn btn-secondary">Kembali</a>
+        </form>
+    </div>
+</div>
+@endsection
