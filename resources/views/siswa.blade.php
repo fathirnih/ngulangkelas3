@@ -11,12 +11,9 @@
 
 <h2>Tambah Siswa</h2>
 
-<form action="/store" method="POST">
-    @csrf
-    <input type="text" name="nama" placeholder="Nama" required>
-    <input type="text" name="kelas" placeholder="Kelas" required>
-    <button type="submit">Simpan</button>
-</form>
+<a href="/create">
+    <button>+ Tambah Siswa</button>
+</a>
 
 <br><br>
 
