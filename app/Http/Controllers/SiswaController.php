@@ -13,6 +13,11 @@ class SiswaController extends Controller
         return view('siswa', compact('siswas'));
     }
 
+     public function create()
+    {
+        return view('create');
+    }
+
     public function store(Request $request)
     {
         DB::table('siswas')->insert([
