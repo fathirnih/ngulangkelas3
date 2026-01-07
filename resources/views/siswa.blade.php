@@ -1,44 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CRUD Siswa</title>
-    <style>
-        table { border-collapse: collapse; width: 60%; }
-        th, td { border: 1px solid black; padding: 8px; text-align: center; }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
 
-<h2>Tambah Siswa</h2>
+@section('title', 'Data Siswa')
 
-<a href="/create">
-    <button>+ Tambah Siswa</button>
-</a>
+@section('content')
+<div class="card">
+    <div class="card-header bg-gradient-primary text-white">
+        <h6 class="mb-0">Data Siswa</h6>
+    </div>
 
-<br><br>
-
-<h2>Data Siswa</h2>
-
-<table>
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Kelas</th>
-        <th>Aksi</th>
-    </tr>
-
-    @foreach ($siswas as $siswa)
-    <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $siswa->nama }}</td>
-        <td>{{ $siswa->kelas }}</td>
-        <td>
-            <a href="/edit/{{ $siswa->id }}">Edit</a> |
-            <a href="/delete/{{ $siswa->id }}" onclick="return confirm('Yakin hapus?')">Hapus</a>
-        </td>
-    </tr>
-    @endforeach
-</table>
-
-</body>
-</html>
+    <div class="card-body px-0 pb-2">
+        <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($siswas as $siswa)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $siswa->nama }}</td>
+                        <td>{{ $siswa->kelas }}</td>
+                        <td>
+                            <a href="/edit/{{ $siswa->id }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/delete/{{ $siswa->id }}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Yakin hapus?')">Hapus</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
