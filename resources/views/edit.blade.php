@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header bg-gradient-warning text-white">
+    <div class="card-header bg-gradient-success text-white">
         <h6 class="mb-0">Edit Siswa</h6>
     </div>
 
@@ -24,7 +24,7 @@
                        value="{{ $siswa->kelas }}" required>
             </div>
 
-            <button class="btn btn-warning">Update</button>
+            <button class="btn btn-success">Update</button>
             <a href="/" class="btn btn-secondary">Kembali</a>
         </form>
     </div>

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header bg-gradient-primary text-white">
+    <div class="card-header bg-gradient-success text-white">
         <h6 class="mb-0">Data Siswa</h6>
     </div>
 
@@ -26,9 +26,10 @@
                         <td>{{ $siswa->nama }}</td>
                         <td>{{ $siswa->kelas }}</td>
                         <td>
-                            <a href="/edit/{{ $siswa->id }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="/delete/{{ $siswa->id }}" class="btn btn-danger btn-sm"
+                            <a href="/edit/{{ $siswa->id }}" class="btn btn-success btn-sm">Edit</a>
+                            <a href="/delete/{{ $siswa->id }}" class="btn btn-secondary btn-sm"
                                onclick="return confirm('Yakin hapus?')">Hapus</a>
+
                         </td>
                     </tr>
                     @endforeach
