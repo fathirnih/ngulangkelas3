@@ -12,14 +12,16 @@
         <form action="/update/{{ $siswa->id }}" method="POST">
             @csrf
 
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Nama</label>
-                <input type="text" name="nama" class="form-control" value="{{ $siswa->nama }}" required>
+                <input type="text" name="nama" class="form-control"
+                       value="{{ $siswa->nama }}" required>
             </div>
 
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Kelas</label>
-                <input type="text" name="kelas" class="form-control" value="{{ $siswa->kelas }}" required>
+                <input type="text" name="kelas" class="form-control"
+                       value="{{ $siswa->kelas }}" required>
             </div>
 
             <button class="btn btn-warning">Update</button>
