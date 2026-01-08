@@ -25,7 +25,7 @@ class SiswaController extends Controller
             'kelas' => $request->kelas,
         ]);
 
-        return redirect('/');
+        return redirect()->route('siswa.index');
     }
 
     public function edit($id)
@@ -41,13 +41,13 @@ class SiswaController extends Controller
             'kelas' => $request->kelas,
         ]);
 
-        return redirect('/');
+        return redirect()->route('siswa.index');
     }
 
     public function destroy($id)
     {
         DB::table('siswas')->where('id', $id)->delete();
-        return redirect('/');
+        return redirect()->route('siswa.index');
     }
 }
 

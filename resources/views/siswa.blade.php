@@ -26,9 +26,21 @@
                         <td>{{ $siswa->nama }}</td>
                         <td>{{ $siswa->kelas }}</td>
                         <td>
-                            <a href="/edit/{{ $siswa->id }}" class="btn btn-success btn-sm">Edit</a>
-                            <a href="/delete/{{ $siswa->id }}" class="btn btn-secondary btn-sm"
-                               onclick="return confirm('Yakin hapus?')">Hapus</a>
+                            <a href="{{ route('siswa.edit', $siswa->id) }}"
+                               class="btn btn-success btn-sm">
+                             Edit
+                            </a>
+                            <form action="{{ route('siswa.destroy', $siswa->id) }}"
+      method="POST"
+      style="display:inline-block">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-secondary btn-sm"
+            onclick="return confirm('Yakin hapus?')">
+        Hapus
+    </button>
+</form>
+
 
                         </td>
                     </tr>
