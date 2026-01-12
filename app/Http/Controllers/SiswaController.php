@@ -25,13 +25,14 @@ class SiswaController extends Controller
             'kelas' => $request->kelas,
         ]);
 
-        return redirect('/');
+        return redirect()->route('siswa.index') 
+        ->with('success', 'Data produk berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $siswa = DB::table('siswas')->where('id', $id)->first();
-        return view('edit', compact('siswa'));
+        return view('editt', compact('siswa'));
     }
 
     public function update(Request $request, $id)
@@ -41,13 +42,15 @@ class SiswaController extends Controller
             'kelas' => $request->kelas,
         ]);
 
-        return redirect('/');
+        return redirect()->route('siswa.index') 
+        ->with('success', 'Data produk berhasil diperbarui');;
     }
 
     public function destroy($id)
     {
         DB::table('siswas')->where('id', $id)->delete();
-        return redirect('/');
+        return redirect()->route('siswa.index')
+        ->with('success', 'Data produk berhasil dihapus');;
     }
 }
 

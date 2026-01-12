@@ -9,19 +9,19 @@
     </div>
 
     <div class="card-body">
-        <form action="/update/{{ $siswa->id }}" method="POST">
+        <form action="{{ route('siswa.update', $siswa->id) }}" method="POST" >
             @csrf
 
             <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Nama</label>
                 <input type="text" name="nama" class="form-control"
-                       value="{{ $siswa->nama }}" required>
+                       value="{{ $siswa->nama }}" >
             </div>
 
             <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Kelas</label>
                 <input type="text" name="kelas" class="form-control"
-                       value="{{ $siswa->kelas }}" required>
+                       value="{{ $siswa->kelas }}">
             </div>
 
             <button class="btn btn-success">Update</button>
