@@ -28,13 +28,27 @@ class ProdukController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        // Logika ini sama dengan Produk::create([...]) di Tinker
-        Produk::create([
-            'nama_barang' => $request->nama_barang,
-            'jumlah'      => $request->jumlah,
-        ]);
+        $request->validate([
+    'nama_barang' => [
+        'required',
+        'regex:/^[a-zA-Z\s]+$/'
+    ],
+    'jumlah' => 'required|integer|min:1',
+], [
+        'nama_barang.required' => 'Nama barang wajib diisi',
+        'nama_barang.regex'    => 'Nama barang hanya boleh berisi huruf',
+        'jumlah.required'      => 'Jumlah barang wajib diisi',
+         'jumlah.integer'       => 'Jumlah harus berupa angka',
+         'jumlah.min'           => 'Jumlah minimal 1',
+    ]);
 
-        return redirect()->route('produk.index');
+    Produk::create([
+        'nama_barang' => $request->nama_barang,
+        'jumlah'      => $request->jumlah,
+    ]);
+
+        return redirect()->route('produk.index')
+        ->with('success', 'Data produk berhasil ditambahkan');
     }
 
     /**
@@ -80,12 +94,22 @@ class ProdukController extends Controller
      */
   public function update(Request $request, Produk $produk)
     {
-        $produk->update([
-            'nama_barang' => $request->nama_barang,
-            'jumlah'      => $request->jumlah,
-        ]);
+       $request->validate([
+        'nama_barang' => [
+            'required',
+            'regex:/^[a-zA-Z\s]+$/'
+        ],
+        'jumlah' => 'required|integer|min:1',
+    ], [
+        'nama_barang.required' => 'Nama barang wajib diisi',
+        'nama_barang.regex'    => 'Nama barang hanya boleh berisi huruf',
+        'jumlah.required'      => 'Jumlah barang wajib diisi',
+        'jumlah.integer'       => 'Jumlah harus berupa angka',
+        'jumlah.min'           => 'Jumlah minimal 1',
+    ]);
 
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')
+        ->with('success', 'Data produk berhasil diperbarui');
     }
 
     /**
@@ -94,6 +118,7 @@ class ProdukController extends Controller
     public function destroy(Produk $produk) 
     {
         $produk->delete();
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')
+        ->with('success', 'Data produk berhasil dihapus');
     }
 }

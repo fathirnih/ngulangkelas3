@@ -11,13 +11,20 @@
          <table border="0" width="600">
              <tr>
                  <td>NAMA BARANG</td>
-                 <td><input type="text" name="nama_barang" value="{{ $produk->nama_barang }}"></td>
-
+                 <td><input type="text" name="nama_barang" value="{{ $produk->nama_barang }}">
+                 @error('nama_barang')
+                <br><small style="color:red;"> {{ $message }}</small></br>
+                @enderror
+            </td>
              </tr>
 
              <tr>
                  <td>JUMLAH BARANG</td>
-                 <td><input type="number" name="jumlah" value="{{ $produk->jumlah }}"></td>
+                 <td><input type="teks" name="jumlah" value="{{ $produk->jumlah }}">
+                @error('jumlah')
+                <br><small style="color:red;"> {{ $message }}</small></br>
+                @enderror
+            </td>
              </tr>
              
              <tr>

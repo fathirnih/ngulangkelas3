@@ -7,6 +7,11 @@
     <title>Produk</title>
 </head>
 <body>
+    @if (session('success'))
+    <div style="background:#d4edda; color:#155724; padding:10px; margin-bottom:10px;">
+        {{ session('success') }}
+    </div>
+@endif
     <table border="1" width="700">
         <tr>
             <td>NAMA BARANG</td>

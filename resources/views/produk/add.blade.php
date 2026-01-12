@@ -10,12 +10,20 @@
         <table border="0" width="600">
             <tr>
                 <td>NAMA BARANG</td>
-                <td><input type="text" name="nama_barang" required></td>
+                <td><input type="text" name="nama_barang">
+                @error('nama_barang')
+                <br><small style="color:red;"> {{ $message }}</small></br>
+                @enderror
+            </td>
             </tr>
 
             <tr>
                 <td>JUMLAH BARANG</td>
-                <td><input type="text" name="jumlah" required></td>
+                <td><input type="text" name="jumlah">
+                @error('jumlah')
+                <br><small style="color:red;"> {{ $message }}</small></br>
+                @enderror
+            </td>
             </tr>
             <tr>
                 <td><a href="{{ route('produk.index') }}">Kembali</a></td>
