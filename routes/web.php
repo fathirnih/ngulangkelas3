@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SiswaController;
 
-Route::get('/', [SiswaController::class, 'index']);
-Route::get('/create', [SiswaController::class, 'create']);
-Route::post('/store', [SiswaController::class, 'store']);
-Route::get('/edit/{id}', [SiswaController::class, 'edit']);
-Route::post('/update/{id}', [SiswaController::class, 'update']);
-Route::get('/delete/{id}', [SiswaController::class, 'destroy']);
+//Route::get('/', [SiswaController::class, 'index'])->name('siswa.index');
+//Route::resource('siswa', SiswaController::class)
+  //  ->except(['index','show']);
+
+Route::resource('produk', ProdukController::class);
+Route::resource('siswa', SiswaController::class);

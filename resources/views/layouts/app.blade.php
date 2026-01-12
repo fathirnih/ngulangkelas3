@@ -5,6 +5,24 @@
     <title>@yield('title')</title>
 
     <link href="{{ asset('assets/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+    <style>
+/* Hilangkan garis merah Material Dashboard */
+.input-group-outline .form-control {
+    border: 1px solid #ced4da !important;
+}
+
+.input-group-outline.is-focused .form-control,
+.input-group-outline.is-filled .form-control {
+    border-color: #4CAF50 !important; /* hijau */
+}
+
+/* Hilangkan validasi merah browser */
+input:invalid {
+    box-shadow: none;
+    outline: none;
+}
+</style>
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -18,12 +36,12 @@
         </div>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white" href="/">
+                <a class="nav-link text-white" href="{{ route('siswa.index') }}">
                     <span class="nav-link-text ms-1">Data Siswa</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="/create">
+                <a class="nav-link text-white" href="{{ route('siswa.create') }}">
                     <span class="nav-link-text ms-1">Tambah Siswa</span>
                 </a>
             </li>
