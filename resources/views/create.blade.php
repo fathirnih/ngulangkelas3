@@ -12,12 +12,12 @@
         <form action="{{ route('siswa.store') }}" method="POST">
             @csrf
 
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Nama</label>
                 <input type="text" name="nama" class="form-control">
             </div>
 
-            <div class="input-group input-group-outline mb-3">
+            <div class="input-group input-group-outline is-filled mb-3">
                 <label class="form-label">Kelas</label>
                 <input type="text" name="kelas" class="form-control">
             </div>
