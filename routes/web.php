@@ -11,3 +11,7 @@ use App\Http\Controllers\SiswaController;
 
 Route::resource('produk', ProdukController::class);
 Route::resource('siswa', SiswaController::class);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

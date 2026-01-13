@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Produk</title>
-</head>
-<body>
-         <h1>Detail Data dengan id {{$produk->id}}</h1>
+@extends('layouts.app')
 
-        <table border="0" width="600">
-            <tr>
-                <td>NAMA BARANG</td>
-                <td><input type="text" name="nama_barang" value="{{ $produk->nama_barang }}"></td>
-            </tr>
-            <tr>
-                <td>JUMLAH BARANG</td>
-                <td><input type="number" name="jumlah" value="{{ $produk->jumlah }}"></td>
-            </tr>
-            <tr>
-                <td><a href="{{ route('produk.index') }}">Kembali</a></td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
+@section('title', 'Detail Produk')
 
-</body>
-</html>
+@section('content')
+
+<div class="card">
+    <div class="card-header bg-gradient-success text-white">
+        <h5 class="mb-0">Detail Produk (ID: {{ $produk->id }})</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-4 font-weight-bold">Nama Barang</div>
+            <div class="col-md-8">{{ $produk->nama_barang }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4 font-weight-bold">Jumlah Barang</div>
+            <div class="col-md-8">{{ $produk->jumlah }}</div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ route('produk.index') }}" class="btn btn-secondary">
+                Kembali
+            </a>
+            <a href="{{ route('produk.edit', $produk->id) }}" class="btn bg-gradient-success">
+                Edit
+            </a>
+        </div>
+    </div>
+</div>
+
+@endsection
