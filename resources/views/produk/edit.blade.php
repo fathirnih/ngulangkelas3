@@ -1,53 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Produk</title>
-</head>
-<body>
-         <h1>Detail Data dengan id {{$produk->id}}</h1>
-  <form action="{{ route('produk.update', $produk->id) }}" method="POST">
-      @csrf
-      @method('PUT') {{-- WAJIB untuk Update --}}
-         <table border="0" width="600">
-             <tr>
-                 <td>NAMA BARANG</td>
-                 <td><input type="text" name="nama_barang" value="{{ $produk->nama_barang }}">
-                 @error('nama_barang')
-                <br><small style="color:red;"> {{ $message }}</small></br>
-                @enderror
-            </td>
-             </tr>
+@extends('layouts.app')
 
-             <tr>
-                 <td>JUMLAH BARANG</td>
-                 <td><input type="teks" name="jumlah" value="{{ $produk->jumlah }}">
-                @error('jumlah')
-                <br><small style="color:red;"> {{ $message }}</small></br>
-                @enderror
-            </td>
-             </tr>
-             
-             <tr>
-                 <td><a href="{{ route('produk.index') }}">Kembali</a></td>
-                 <td> <button type="submit">Update</button></td>
-             </tr>
-         </table>
-    </form>
-{{-- 
-      <form action="{{ route('produk.update', $produk->id) }}" method="POST">
-          @csrf
-          @method('PUT') 
+@section('title', 'Edit Produk')
 
-          <label>Nama Barang:</label><br>
-          <input type="text" name="nama_barang" value="{{ $produk->nama_barang }}"><br><br>
+@section('content')
 
-          <label>Jumlah:</label><br>
-          <input type="number" name="jumlah" value="{{ $produk->jumlah }}"><br><br>
+<div class="card">
+    <div class="card-header bg-gradient-success text-white">
+        <h5 class="mb-0">Edit Produk (ID: {{ $produk->id }})</h5>
+    </div>
 
-          <button type="submit">Update Data</button>
-          <a href="{{ route('produk.index') }}">Batal</a>
-      </form>
- --}}
+    <div class="card-body">
+        <form action="{{ route('produk.update', $produk->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-</body>
-</html>
+            {{-- Nama Barang --}}
+            <div class="input-group input-group-static mb-3">
+                <label>Nama Barang</label>
+                <input type="text"
+                       name="nama_barang"
+                       class="form-control @error('nama_barang') is-invalid @enderror"
+                       value="{{ old('nama_barang', $produk->nama_barang) }}">
+            </div>
+            @error('nama_barang')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+
+            {{-- Jumlah Barang --}}
+            <div class="input-group input-group-static mb-3">
+                <label>Jumlah Barang</label>
+                <input type="teks"
+                       name="jumlah"
+                       class="form-control @error('jumlah') is-invalid @enderror"
+                       value="{{ old('jumlah', $produk->jumlah) }}">
+            </div>
+            @error('jumlah')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{{ route('produk.index') }}" class="btn btn-secondary">
+                    Kembali
+                </a>
+                <button type="submit" class="btn bg-gradient-success">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@endsection

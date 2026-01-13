@@ -1,48 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Produk</title>
-</head>
-<body>
-    @if (session('success'))
-    <div style="background:#d4edda; color:#155724; padding:10px; margin-bottom:10px;">
+@extends('layouts.app')
+
+@section('title', 'Data Produk')
+
+@section('content')
+
+@if (session('success'))
+    <div class="alert alert-success text-white">
         {{ session('success') }}
     </div>
 @endif
-    <table border="1" width="700">
-        <tr>
-            <td>NAMA BARANG</td>
-            <td>JUMLAH</td>
-            <td>
-                <a href="{{ route('produk.create') }}">Tambah Barang Baru</a>
-            </td>
 
-        </tr>
-        @forelse ($data as $item)
-        <tr>
-            <td>{{ $item->nama_barang }}</td>
-            <td>{{ $item->jumlah }}</td>
-            <td>
-                <a href="{{ route('produk.edit', $item->id) }}">Edit</a> |
-                <a href="{{ route('produk.show', $item->id) }}">Detail</a> |
-                <form action="{{ route('produk.destroy', $item->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                </form>
+<div class="card">
+    <div class="card-header bg-gradient-success text-white d-flex justify-content-between">
+        <h5 class="mb-0">Data Produk</h5>
+        <a href="{{ route('produk.create') }}" class="btn btn-light btn-sm">
+            + Tambah Produk
+        </a>
+    </div>
 
-            </td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="2">Data tidak tersedia</td>
-        </tr>
-        @endforelse
-    </table>
+    <div class="card-body px-0 pb-2">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                            Nama Barang
+                        </th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                            Jumlah
+                        </th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($data as $item)
+                        <tr>
+                            <td>{{ $item->nama_barang }}</td>
+                            <td>{{ $item->jumlah }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+                                <a href="{{ route('produk.show', $item->id) }}" class="btn btn-info btn-sm">
+                                    Detail
+                                </a>
+                                <form action="{{ route('produk.destroy', $item->id) }}"
+                                      method="POST"
+                                      class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">
+                                Data tidak tersedia
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-
-</body>
-</html>
+@endsection
