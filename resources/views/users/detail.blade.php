@@ -9,7 +9,7 @@
     </div>
 
     <div class="card-body">
-        <table class="table">
+        <table class="table table-bordered">
             <tr>
                 <th width="150">Nama</th>
                 <td>{{ $user->nama }}</td>
@@ -18,9 +18,18 @@
                 <th>Kota</th>
                 <td>{{ $user->kota }}</td>
             </tr>
+            <tr>
+                <th>No HP</th>
+                <td>{{ $user->no_hp }}</td>
+            </tr>
         </table>
 
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('users.index') }}" class="btn btn-secondary">
+            Kembali
+        </a>
+        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">
+            Edit
+        </a>
     </div>
 </div>
 @endsection

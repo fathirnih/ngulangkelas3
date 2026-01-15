@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::paginate(10);
         return view('users.index', compact('data'));
     }
 
@@ -31,16 +31,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => [
-                'required',
-                'regex:/^[a-zA-Z\s]+$/'
-            ],
-            'kota' => 'required'
-        ], [
-            'nama.required' => 'Nama wajib diisi',
-            'nama.regex'    => 'Nama hanya boleh berisi huruf',
-            'kota.required' => 'Kota wajib diisi',
-        ]);
+    'nama' => 'required|regex:/^[a-zA-Z\s]+$/',
+    'kota' => 'required|regex:/^[a-zA-Z\s]+$/',
+    'no_hp' => 'required|numeric|digits_between:10,13'
+], [
+    'nama.required' => 'Nama wajib diisi',
+    'nama.regex' => 'Nama hanya boleh huruf',
+
+    'kota.required' => 'Kota wajib diisi',
+    'kota.regex' => 'Kota hanya boleh huruf',
+
+    'no_hp.required' => 'Nomor HP wajib diisi',
+    'no_hp.numeric' => 'Nomor HP harus angka',
+    'no_hp.digits_between' => 'Nomor HP harus 10–13 digit'
+]);
+
 
         User::create([
             'nama' => $request->nama,
@@ -73,16 +78,21 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'nama' => [
-                'required',
-                'regex:/^[a-zA-Z\s]+$/'
-            ],
-            'kota' => 'required'
-        ], [
-            'nama.required' => 'Nama wajib diisi',
-            'nama.regex'    => 'Nama hanya boleh berisi huruf',
-            'kota.required' => 'Kota wajib diisi',
-        ]);
+    'nama' => 'required|regex:/^[a-zA-Z\s]+$/',
+    'kota' => 'required|regex:/^[a-zA-Z\s]+$/',
+    'no_hp' => 'required|numeric|digits_between:10,13'
+], [
+    'nama.required' => 'Nama wajib diisi',
+    'nama.regex' => 'Nama hanya boleh huruf',
+
+    'kota.required' => 'Kota wajib diisi',
+    'kota.regex' => 'Kota hanya boleh huruf',
+
+    'no_hp.required' => 'Nomor HP wajib diisi',
+    'no_hp.numeric' => 'Nomor HP harus angka',
+    'no_hp.digits_between' => 'Nomor HP harus 10–13 digit'
+]);
+
 
         $user->update([
             'nama' => $request->nama,

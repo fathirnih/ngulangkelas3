@@ -24,6 +24,7 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Kota</th>
+                    <th>No HP</th>
                     <th width="180">Aksi</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->kota }}</td>
+                    <td>{{ $item->no_hp }}</td>
                     <td>
                         <a href="{{ route('users.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
                         <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>

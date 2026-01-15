@@ -23,10 +23,19 @@
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">
+                            No
+                        </th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder">
                             Nama Barang
                         </th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                            Harga
+                        </th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                            Deskripsi
+                        </th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">
                             Jumlah
                         </th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">
@@ -37,8 +46,32 @@
                 <tbody>
                     @forelse ($data as $item)
                         <tr>
+                            <td>{{ $data->firstItem() + $loop->index }}</td>
+
                             <td>{{ $item->nama_barang }}</td>
-                            <td>{{ $item->jumlah }}</td>
+
+                            <td>
+                                Rp {{ number_format($item->harga, 0, ',', '.') }}
+                            </td>
+
+                            <td>
+                                {{ $item->deskripsi ?? '-' }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ $item->jumlah }}
+                            </td>
+                            <td>
+    @if($item->image)
+        <img src="{{ asset('images/produk/'.$item->image) }}"
+             width="60"
+             class="rounded">
+    @else
+        -
+    @endif
+</td>
+
+
                             <td class="text-center">
                                 <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                     Edit
@@ -61,13 +94,15 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="text-center text-muted">
+                            <td colspan="6" class="text-center text-muted">
                                 Data tidak tersedia
                             </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
+            <div class="d-flex justify-content-end mt-2 me-2">
+    {{ $data->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
