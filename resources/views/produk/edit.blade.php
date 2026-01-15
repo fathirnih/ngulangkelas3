@@ -17,12 +17,36 @@
             {{-- Nama Barang --}}
             <div class="input-group input-group-static mb-3">
                 <label>Nama Barang</label>
-                <input type="text"
+                <input type="teks"
                        name="nama_barang"
                        class="form-control @error('nama_barang') is-invalid @enderror"
                        value="{{ old('nama_barang', $produk->nama_barang) }}">
             </div>
             @error('nama_barang')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+
+            {{-- Harga --}}
+            <div class="input-group input-group-static mb-3">
+                <label>Harga</label>
+                <input type="teks"
+                       name="harga"
+                       class="form-control @error('harga') is-invalid @enderror"
+                       value="{{ old('harga', $produk->harga) }}"
+                       placeholder="Contoh: 5000">
+            </div>
+            @error('harga')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+
+            {{-- Deskripsi --}}
+            <div class="input-group input-group-static mb-3">
+                <label>Deskripsi</label>
+                <textarea name="deskripsi"
+                          class="form-control @error('deskripsi') is-invalid @enderror"
+                          rows="3">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
+            </div>
+            @error('deskripsi')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
 
@@ -37,6 +61,17 @@
             @error('jumlah')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
+            <div class="mb-3">
+    <label class="form-label">Gambar Produk</label>
+    <input type="file" name="image" class="form-control">
+
+    @if($produk->image)
+        <img src="{{ asset('images/produk/'.$produk->image) }}"
+             width="120"
+             class="mt-2 rounded">
+    @endif
+</div>
+
 
             <div class="d-flex justify-content-between mt-4">
                 <a href="{{ route('produk.index') }}" class="btn btn-secondary">
