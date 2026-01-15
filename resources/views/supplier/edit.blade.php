@@ -1,0 +1,48 @@
+@extends('layouts.app')
+
+@section('title', 'Edit Supplier')
+
+@section('content')
+<div class="card">
+    <div class="card-header bg-success text-white">
+        <h5 class="mb-0">Edit Supplier</h5>
+    </div>
+
+    <div class="card-body">
+        <form action="{{ route('supplier.update', $supplier->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label class="form-label">Nama Supplier</label>
+                <input type="text" name="nama" class="form-control"
+                    value="{{ old('nama', $supplier->nama) }}">
+                @error('nama')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Kota</label>
+                <input type="text" name="kota" class="form-control"
+                    value="{{ old('kota', $supplier->kota) }}">
+                @error('kota')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contact Person (CP)</label>
+                <input type="text" name="cp" class="form-control"
+                    value="{{ old('cp', $supplier->cp) }}">
+                @error('cp')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <button class="btn btn-success">Update</button>
+            <a href="{{ route('supplier.index') }}" class="btn btn-secondary">Kembali</a>
+        </form>
+    </div>
+</div>
+@endsection

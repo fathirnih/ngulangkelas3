@@ -51,9 +51,15 @@
             {{-- Data Users --}}
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('users.index') }}">
-                   <span class="nav-link-text ms-1">Data Users</span>
+                    <span class="nav-link-text ms-1">Data Users</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('supplier.index') }}">
+                    <span class="nav-link-text ms-1">Data Supplier</span>
+                </a>
+            </li>
+
         </ul>
     </aside>
 
