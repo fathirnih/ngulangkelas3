@@ -13,6 +13,10 @@ class UserController extends Controller
     public function index()
     {
         $data = User::paginate(10);
+        $data = User::when(request('search'), function($query) {
+        $query->where('nama', 'like', '%' . request('search') . '%');
+    })->paginate(10);
+
         return view('users.index', compact('data'));
     }
 

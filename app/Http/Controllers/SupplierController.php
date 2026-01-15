@@ -10,6 +10,10 @@ class SupplierController extends Controller
     public function index()
     {
         $data = Supplier::paginate(10);
+        $data = Supplier::when(request('search'), function($query) {
+    $query->where('nama', 'like', '%' . request('search') . '%');
+})->paginate(10); // 10 per halaman
+
         return view('supplier.index', compact('data'));
     }
 

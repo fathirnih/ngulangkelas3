@@ -10,9 +10,15 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-        public function index()
+        public function index(Request $request)
         {
             $data = Produk::paginate(10);
+            $search = $request->query('search');
+             $data = Produk::when($search, function($query, $search) {
+            return $query->where('nama_barang', 'like', "%{$search}%");
+        })
+        ->paginate(10)
+        ->withQueryString(); // biar query search tetap ada saat paginate
             return view('produk.index', compact('data'));
         }
 
