@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="card">
+<div class="card mb-4">
     <div class="card-header bg-gradient-success text-white">
         <h5 class="mb-0">Detail Produk (ID: {{ $produk->id }})</h5>
     </div>
@@ -38,19 +38,26 @@
             <div class="col-md-4 font-weight-bold">Jumlah Barang</div>
             <div class="col-md-8">{{ $produk->jumlah }}</div>
         </div>
+
+        {{-- Gambar Produk --}}
         @if($produk->image)
-    <img src="{{ asset('images/produk/'.$produk->image) }}"
-         class="img-fluid mb-3"
-         style="max-width:300px">
-@endif
+            <div class="row mb-3">
+                <div class="col-md-4 font-weight-bold">Gambar Produk</div>
+                <div class="col-md-8">
+                    <img src="{{ asset('images/produk/'.$produk->image) }}"
+                         class="img-fluid mb-3"
+                         style="max-width:300px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+            </div>
+        @endif
 
-
-        <div class="mt-4">
+        {{-- Action Buttons --}}
+        <div class="mt-4 d-flex justify-content-between">
             <a href="{{ route('produk.index') }}" class="btn btn-secondary">
-                Kembali
+                <i class="fas fa-arrow-left"></i> Kembali
             </a>
             <a href="{{ route('produk.edit', $produk->id) }}" class="btn bg-gradient-success">
-                Edit
+                <i class="fas fa-edit"></i> Edit
             </a>
         </div>
 

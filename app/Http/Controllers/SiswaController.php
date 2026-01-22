@@ -50,7 +50,7 @@ class SiswaController extends Controller
     {
         DB::table('siswas')->where('id', $id)->delete();
         return redirect()->route('siswa.index')
-        ->with('success', 'Data produk berhasil dihapus');;
+        ->with('delete', 'Data produk berhasil dihapus');;
     }
 }
 

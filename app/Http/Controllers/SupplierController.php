@@ -110,6 +110,6 @@ class SupplierController extends Controller
     {
         $supplier->delete();
         return redirect()->route('supplier.index')
-            ->with('success','Data supplier berhasil dihapus');
+            ->with('delete','Data supplier berhasil dihapus');
     }
 }
