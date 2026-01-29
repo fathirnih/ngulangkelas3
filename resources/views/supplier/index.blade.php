@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title','Data Supplier')
+@section('title', 'Data Supplier')
 
 @section('content')
-<div class="card">
-    <div class="card-header bg-success text-white d-flex justify-content-between">
+<div class="card mb-4">
+    <div class="card-header bg-gradient-success text-white d-flex justify-content-between">
         <h5 class="mb-0">Data Supplier</h5>
         <a href="{{ route('supplier.create') }}" class="btn btn-light btn-sm">
             + Tambah Supplier
@@ -13,40 +13,42 @@
 
     <div class="card-body">
         @if(session('success'))
-            <div class="alert alert-success text-white">
+            <div class="alert alert-success text-white mb-3">
                 {{ session('success') }}
+            </div>
+        @endif
+        @if (session('delete'))
+            <div class="alert alert-danger text-white mb-3">
+                {{ session('delete') }}
             </div>
         @endif
 
         {{-- Search bar --}}
         <form action="{{ route('supplier.index') }}" method="GET" class="d-flex mb-3 align-items-center gap-2">
-            <input type="text" name="search"
-                   class="form-control"
-                   placeholder="Cari Nama Supplier..."
-                   value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="Cari Nama Supplier..." value="{{ request('search') }}">
             <button type="submit" class="btn btn-success" style="min-width: 80px;">Cari</button>
             <a href="{{ route('supplier.index') }}" class="btn btn-secondary" style="min-width: 80px;">Reset</a>
         </form>
 
         <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
                     <tr>
-                        <th>No</th>
+                        <th class="text-center">No</th>
                         <th>Nama</th>
                         <th>Kota</th>
                         <th>CP</th>
-                        <th width="200">Aksi</th>
+                        <th class="text-center" width="200">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($data as $item)
                     <tr>
-                        <td>{{ $data->firstItem() + $loop->index }}</td>
+                        <td class="text-center">{{ $data->firstItem() + $loop->index }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->kota }}</td>
                         <td>{{ $item->cp }}</td>
-                        <td>
+                        <td class="text-center">
                             <a href="{{ route('supplier.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('supplier.destroy', $item->id) }}" method="POST" class="d-inline">

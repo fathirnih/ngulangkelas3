@@ -146,6 +146,6 @@ if ($request->hasFile('image')) {
     {
         $produk->delete();
         return redirect()->route('produk.index')
-        ->with('success', 'Data produk berhasil dihapus');
+        ->with('delete', 'Data produk berhasil dihapus');
     }
 }
