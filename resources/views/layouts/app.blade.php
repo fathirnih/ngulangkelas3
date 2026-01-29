@@ -1,60 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>@yield('title')</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@yield('title', 'Dashboard - SB Admin')</title>
 
-    <link href="{{ asset('assets/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
-    <style>
-/* Hilangkan garis merah Material Dashboard */
-.input-group-outline .form-control {
-    border: 1px solid #ced4da !important;
-}
-
-.input-group-outline.is-focused .form-control,
-.input-group-outline.is-filled .form-control {
-    border-color: #4CAF50 !important; /* hijau */
-}
-
-/* Hilangkan validasi merah browser */
-input:invalid {
-    box-shadow: none;
-    outline: none;
-}
-</style>
-
+    <!-- Link ke CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<body class="sb-nav-fixed">
+    @include('partials.navbar')   <!-- Navbar -->
 
-<body class="g-sidenav-show bg-gray-100">
-
-    {{-- Sidebar --}}
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-success">
-        <div class="sidenav-header">
-            <a class="navbar-brand m-0 text-white">
-                <span class="ms-1 font-weight-bold">CRUD Siswa</span>
-            </a>
+    <div id="layoutSidenav">
+        @include('partials.sidebar')  <!-- Sidebar -->
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    @yield('content') <!-- Konten -->
+                </div>
+            </main>
+            
+            @include('partials.footer')  <!-- Footer -->
         </div>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('siswa.index') }}">
-                    <span class="nav-link-text ms-1">Data Siswa</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('siswa.create') }}">
-                    <span class="nav-link-text ms-1">Tambah Siswa</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+    </div>
 
-    {{-- Main --}}
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-        <div class="container-fluid py-4">
-            @yield('content')
-        </div>
-    </main>
-
-    <script src="{{ asset('assets/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
+
 </html>

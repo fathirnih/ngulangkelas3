@@ -10,11 +10,17 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $data = Produk::all();
-        return view('produk.index', compact('data'));
-    }
+        public function index(Request $request)
+        {
+            $data = Produk::paginate(10);
+            $search = $request->query('search');
+             $data = Produk::when($search, function($query, $search) {
+            return $query->where('nama_barang', 'like', "%{$search}%");
+        })
+        ->paginate(10)
+        ->withQueryString(); // biar query search tetap ada saat paginate
+            return view('produk.index', compact('data'));
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -34,17 +40,32 @@ class ProdukController extends Controller
         'regex:/^[a-zA-Z\s]+$/'
     ],
     'jumlah' => 'required|integer|min:1',
+    'harga' => 'required|integer|min:100',
+    'deskripsi' => 'nullable|string'
 ], [
         'nama_barang.required' => 'Nama barang wajib diisi',
         'nama_barang.regex'    => 'Nama barang hanya boleh berisi huruf',
         'jumlah.required'      => 'Jumlah barang wajib diisi',
-         'jumlah.integer'       => 'Jumlah harus berupa angka',
-         'jumlah.min'           => 'Jumlah minimal 1',
+        'jumlah.integer'       => 'Jumlah harus berupa angka',
+        'jumlah.min'           => 'Jumlah minimal 1',
+        'harga.required'       => 'Harga wajib diisi',
+        'harga.integer'        => 'Harga harus berupa angka',
+        'harga.min'            => 'Harga minimal 100'
     ]);
+    $imageName = null;
+
+if ($request->hasFile('image')) {
+    $imageName = time().'.'.$request->image->extension();
+    $request->image->move(public_path('images/produk'), $imageName);
+}
+
 
     Produk::create([
         'nama_barang' => $request->nama_barang,
         'jumlah'      => $request->jumlah,
+        'harga' => $request->harga,
+        'deskripsi' => $request->deskripsi,
+        'image' => $imageName,
     ]);
 
         return redirect()->route('produk.index')
@@ -100,12 +121,18 @@ class ProdukController extends Controller
             'regex:/^[a-zA-Z\s]+$/'
         ],
         'jumlah' => 'required|integer|min:1',
+        'harga' => 'required|integer|min:100',
+        'deskripsi' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ], [
         'nama_barang.required' => 'Nama barang wajib diisi',
         'nama_barang.regex'    => 'Nama barang hanya boleh berisi huruf',
         'jumlah.required'      => 'Jumlah barang wajib diisi',
         'jumlah.integer'       => 'Jumlah harus berupa angka',
         'jumlah.min'           => 'Jumlah minimal 1',
+        'harga.required'       => 'Harga wajib diisi',
+        'harga.integer'        => 'Harga harus berupa angka',
+        'harga.min'            => 'Harga minimal 100'
     ]);
 
         return redirect()->route('produk.index')
@@ -119,6 +146,6 @@ class ProdukController extends Controller
     {
         $produk->delete();
         return redirect()->route('produk.index')
-        ->with('success', 'Data produk berhasil dihapus');
+        ->with('delete', 'Data produk berhasil dihapus');
     }
 }
